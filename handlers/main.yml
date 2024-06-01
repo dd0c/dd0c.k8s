@@ -1,0 +1,12 @@
+---
+
+- name: Make sure module overlay is loaded
+  ansible.builtin.raw: modprobe overlay
+
+- name: Make sure module br_netfilter is loaded
+  ansible.builtin.raw: modprobe br_netfilter
+
+- name: Reload sysctl changes
+  ansible.builtin.raw: sysctl --system
+
+...

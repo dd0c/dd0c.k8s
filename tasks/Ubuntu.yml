@@ -1,0 +1,35 @@
+---
+
+- name: Make sure swap is off
+  ansible.builtin.raw: swapoff -a
+
+- name: Make sure swap stays off after reboot
+  ansible.builtin.raw: sed -i '/ swap / s/^\(.*\)$/#\1/g' /etc/fstab
+
+- name: Add kernel module overlay to /etc/modules-load.d/containerd.conf and create the file if nonexistant
+  ansible.builtin.lineinfile:
+    path: /etc/modules-load.d/containerd.conf
+    line: overlay
+    create: yes
+  notify:
+    - Make sure module overlay is loaded
+
+- name: Add kernel module br_netfilter to /etc/modules-load.d/containerd.conf and create the file if nonexistant
+  ansible.builtin.lineinfile:
+    path: /etc/modules-load.d/containerd.conf
+    line: br_netfilter
+    create: yes
+  notify:
+    - Make sure module br_netfilter is loaded
+
+- name: Copy configuration file for the critical kernel parameters for Kubernetes
+  ansible.builtin.copy:
+    src: files/etc/sysctl.d/60-kubernetes.conf
+    dest: /etc/sysctl.d/60-kubernetes.conf
+    owner: root
+    group: root
+    mode: '0644'
+  notify:
+    - Reload sysctl changes
+
+...
