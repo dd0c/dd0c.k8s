@@ -46,8 +46,8 @@
 
 - name: Copy the Docker repository file with correct permissions
   ansible.builtin.copy:
-    src: files/etc/apt/docker_com_linux_ubuntu-noble.list
-    dest: /etc/apt/docker_com_linux_ubuntu-noble.list
+    src: files/etc/apt/sources.list.d/docker_com_linux_ubuntu-noble.list
+    dest: /etc/apt/sources.list.d/docker_com_linux_ubuntu-noble.list
     owner: root
     group: root
     mode: '0644'
