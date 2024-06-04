@@ -42,7 +42,7 @@
     - ca-certificates
 
 - name: Make sure the Docker gpg key is installed
-  ansible.builtin.raw: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/docker.gpg
+  ansible.builtin.raw: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --yes --dearmour -o /etc/apt/trusted.gpg.d/docker.gpg
 
 - name: Copy the Docker repository file with correct permissions
   ansible.builtin.copy:
