@@ -44,9 +44,6 @@
 - name: Make sure the Docker gpg key is installed
   ansible.builtin.raw: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/docker.gpg
 
-- name: Add the Docker repository
-  ansible.builtin.raw: add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-
 - name: Copy the Docker repository file with correct permissions
   ansible.builtin.copy:
     src: files/etc/apt/docker_com_linux_ubuntu-noble.list
