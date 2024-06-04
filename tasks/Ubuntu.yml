@@ -40,12 +40,11 @@
     - software-properties-common
     - apt-transport-https
     - ca-certificates
-    - lsb-core
 
 - name: Make sure the Docker gpg key is installed
   ansible.builtin.raw: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmour -o /etc/apt/trusted.gpg.d/docker.gpg
 
 - name: Add the Docker repository
-  ansible.builtin.raw: add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  ansible.builtin.raw: add-apt-repository -y "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
 
 ...
