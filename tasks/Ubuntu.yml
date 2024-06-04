@@ -52,4 +52,10 @@
     group: root
     mode: '0644'
 
+- name: Update the repository cache and update package "containerd.io" to latest version
+  ansible.builtin.apt:
+    name: containerd.io
+    state: latest
+    update_cache: yes
+
 ...
